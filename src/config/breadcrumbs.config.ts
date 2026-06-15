@@ -1,0 +1,58 @@
+import { routes } from "@/shared/constants/routes";
+
+export type BreadcrumbSegment = {
+  label: string;
+  href?: string;
+};
+
+export const UUID_PATTERN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+type BreadcrumbRouteMap = Record<string, BreadcrumbSegment[]>;
+
+export const breadcrumbRoutes: BreadcrumbRouteMap = {
+  [routes.admin.dashboard]: [{ label: "Dashboard" }],
+  [routes.admin.doctors]: [{ label: "Doctors" }],
+  [routes.admin.verification]: [{ label: "Verification" }],
+  [routes.admin.aiJobs]: [{ label: "AI Jobs" }],
+  [routes.admin.auditLogs]: [{ label: "Audit Logs" }],
+  [routes.admin.systemHealth]: [{ label: "System Health" }],
+  [routes.admin.settings]: [{ label: "Settings" }],
+  [routes.admin.settingsProfile]: [
+    { label: "Settings", href: routes.admin.settings },
+    { label: "Profile" },
+  ],
+};
+
+function formatSegmentLabel(segment: string, parentSegment?: string): string {
+  if (UUID_PATTERN.test(segment)) {
+    if (parentSegment === "doctors") return "Doctor";
+    return "Details";
+  }
+
+  return segment
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+export function resolveBreadcrumbs(pathname: string): BreadcrumbSegment[] {
+  if (breadcrumbRoutes[pathname]) {
+    return breadcrumbRoutes[pathname];
+  }
+
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) {
+    return [{ label: "Home" }];
+  }
+
+  return segments.map((segment, index) => {
+    const href = `/${segments.slice(0, index + 1).join("/")}`;
+    const isLast = index === segments.length - 1;
+    const parentSegment = index > 0 ? segments[index - 1] : undefined;
+    return {
+      label: formatSegmentLabel(segment, parentSegment),
+      href: isLast ? undefined : href,
+    };
+  });
+}
