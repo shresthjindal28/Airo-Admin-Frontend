@@ -6,7 +6,7 @@ export default function AdminSignupPage() {
   return (
     <AuthLayout
       title="Create admin account"
-      description="Provision a new operations account for the AIRO platform."
+      description="Provision a new operations account for the Aevomed platform."
       alternateLink={{
         label: "Already have an account?",
         href: routes.auth.adminLogin,

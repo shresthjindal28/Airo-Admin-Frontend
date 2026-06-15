@@ -57,7 +57,7 @@ export function AdminSignupForm() {
         name="email"
         label="Work email"
         render={({ field, id }) => (
-          <AuthInput type="email" autoComplete="email" placeholder="admin@airo.com" id={id} {...field} />
+          <AuthInput type="email" autoComplete="email" placeholder="admin@aevomed.com" id={id} {...field} />
         )}
       />
       <AuthFormField

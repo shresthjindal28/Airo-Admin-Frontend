@@ -1,11 +1,18 @@
 {
-  "name": "AIRO Clinical Workspace",
-  "short_name": "AIRO",
-  "description": "Clinical intelligence platform for doctors",
-  "start_url": "/dashboard",
+  "name": "Aevomed Admin",
+  "short_name": "Aevomed",
+  "description": "Aevomed platform operations console",
+  "start_url": "/admin/dashboard",
   "display": "standalone",
   "background_color": "#fafafa",
-  "theme_color": "#fafafa",
+  "theme_color": "#1c2b2a",
   "orientation": "portrait-primary",
-  "icons": []
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }

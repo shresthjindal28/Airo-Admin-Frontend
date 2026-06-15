@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
 
 import { AppProviders } from "@/providers/app-providers";
+import { adminSiteMetadata } from "@/lib/metadata/site-metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,16 +19,7 @@ import "@/styles/globals.css";
 import "@/styles/themes/admin.css";
 import "@/styles/tokens/colors.css";
 
-export const metadata: Metadata = {
-  title: "AIRO Admin",
-  description: "AIRO platform operations console",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "AIRO Admin",
-  },
-};
+export const metadata: Metadata = adminSiteMetadata;
 
 export default function RootLayout({
   children,
